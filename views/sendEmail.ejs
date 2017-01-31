@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+       <link rel="stylesheet" href='/css/bootstrap.min.css' />
+
+  </head>
+  <body>
+  	<div class = "container">
+  		<div class = "col-sm-3 col-md-3">
+  		</div>
+  		<div class="col-sm-6 col-md-6">
+  			<div class ="row">
+				 <h1><%= title %></h1>
+    			<p>Welcome to <%= title %></p>
+  			</div>
+  			<div class="row">
+  				<label>Enter the email id of the Reciever*</label>
+  				<input type="text" class="form-control" id="toemail" placeholder="Enter the email-id of the Reciever..">
+  				<label>Enter the subject*</label>
+  				<input type="text" class="form-control" id="subject" placeholder="Enter the subject..">
+  				<label>Enter the body of the message</label>
+  				<textarea class="form-control" rows="5" id="body" placeholder="Enter the body of the email"></textarea>
+  				<button type="button" class="btn btn-default" id="sendemail">SEND E-MAIL</button>
+  			</div>
+ 
+  		</div>
+  		<div class ="col-md-3 col-md-3">
+  		</div>
+  	</div>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script type="text/javascript">
+  		$('#sendemail').click( function (evt){
+  			evt.preventDefault();
+  			console.log('hello');
+  			var receiverEmailId = $('#toemail').val();
+  			var subject = $('#subject').val();
+  			var emailBody = $('#body').val();
+
+  				$.ajax({
+  					url : '/sendemail' ,
+  					type : 'POST' ,
+  					data : {
+  						receiverEmailId : receiverEmailId ,
+  						subject : subject ,
+  						emailBody : emailBody
+  					} ,
+  					success : function(result){
+  						if(!result.error){
+  							alert(result.msg);
+  						}
+
+  					}
+  				})
+  		});
+  	</script>
+  </body>
+ 
+</html>
